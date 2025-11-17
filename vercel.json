@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npm run build",
+  "installCommand": "cd Julevibber && npm install",
+  "outputDirectory": "Julevibber/dist"
+}

@@ -2,7 +2,6 @@ import express from 'express';
 import path from 'path';
 
 const app = express();
-const PORT = 3000;
 
 // Redirect root to home page
 app.get('/', (req, res) => {
@@ -12,8 +11,13 @@ app.get('/', (req, res) => {
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, '../public')));
 
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = 3000;
+    app.listen(PORT, () => {
+        console.log(`Server is running at http://localhost:${PORT}`);
+    });
+}
 
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
-});
+// Export for Vercel serverless
+export default app;

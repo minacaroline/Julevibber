@@ -1,5 +1,16 @@
 {
-  "buildCommand": "npm run build",
-  "installCommand": "cd Julevibber && npm install",
-  "outputDirectory": "Julevibber/dist"
+  "version": 2,
+  "builds": [
+    {
+      "src": "Julevibber/src/server.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "Julevibber/src/server.ts"
+    }
+  ],
+  "installCommand": "cd Julevibber && npm install"
 }

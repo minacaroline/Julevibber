@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julevibber - Hjem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: #8E0C0C;
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+            position: relative;
+            overflow: visible;
+        }
+        header a.home-link { text-decoration: none; color: inherit; display: inline-block; cursor: pointer; }
+        
+        .star {
+            position: absolute;
+            font-size: 0.8rem;
+            animation: twinkle 2s ease-in-out forwards;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        @keyframes twinkle {
+            0% {
+                opacity: 0;
+                transform: translate(0, 0) scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(var(--tx), var(--ty)) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(calc(var(--tx) * 1.5), calc(var(--ty) * 1.5)) scale(0.5);
+            }
+        }
+        
+        h1 {
+            font-family: 'Cinzel Decorative', cursive;
+            font-weight: 900;
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(45deg, #D4AF37, #F4E4B0, #D4AF37, #E6D699);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8))
+                    drop-shadow(0 0 25px rgba(255, 215, 0, 0.6))
+                    drop-shadow(0 0 35px rgba(255, 215, 0, 0.4))
+                    drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+            animation: shimmer 3s ease-in-out infinite, glow 2s ease-in-out infinite alternate;
+            text-shadow: 
+                1px 1px 0 rgba(139, 115, 85, 0.3),
+                2px 2px 0 rgba(139, 115, 85, 0.2),
+                3px 3px 0 rgba(139, 115, 85, 0.1);
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 3rem;
+            }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes glow {
+            0% {
+                filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3))
+                        drop-shadow(0 0 10px rgba(255, 215, 0, 0.2))
+                        drop-shadow(0 0 15px rgba(255, 215, 0, 0.1))
+                        drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+            }
+            100% {
+                filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.45))
+                        drop-shadow(0 0 15px rgba(255, 215, 0, 0.35))
+                        drop-shadow(0 0 20px rgba(255, 215, 0, 0.25))
+                        drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+            }
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .countdown {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .countdown-value {
+            font-weight: bold;
+            font-size: 2rem;
+        }
+        
+        main {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 0;
+        }
+        
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 2rem;
+            width: 100%;
+            max-width: 900px;
+            height: 60vh;
+            min-height: 340px;
+            box-sizing: border-box;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .card {
+            background: linear-gradient(160deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+            overflow: hidden;
+            min-width: 0;
+            min-height: 0;
+            height: 100%;
+            width: 100%;
+            padding: 1.2rem 1rem;
+            box-sizing: border-box;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(160deg, rgba(255, 255, 255, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            background: linear-gradient(160deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card:hover::before {
+            opacity: 1;
+        }
+        
+        .card:active {
+            transform: translateY(-5px);
+        }
+        
+        .card-icon {
+            font-size: clamp(2.2rem, 4vw, 5rem);
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .card-title {
+            font-size: clamp(1.2rem, 2.2vw, 3rem);
+            font-weight: bold;
+            margin-bottom: 0.2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-description {
+            font-size: clamp(0.8rem, 1vw, 1.2rem);
+            opacity: 0.9;
+            line-height: 1.5;
+            margin-bottom: 0.2rem;
+        }
+                @media (max-width: 900px) {
+                    .cards-container {
+                        gap: 1rem;
+                        height: 54vh;
+                        min-height: 220px;
+                    }
+                    .card-icon { font-size: 5vw; }
+                    .card-title { font-size: 3vw; }
+                    .card-description { font-size: 1.5vw; }
+                }
+                @media (max-width: 600px) {
+                    .cards-container {
+                        gap: 0.5rem;
+                        height: 48vh;
+                        min-height: 120px;
+                    }
+                    .card-icon { font-size: 8vw; }
+                    .card-title { font-size: 4vw; }
+                    .card-description { font-size: 2vw; }
+                }
+
+            .daily-film-button {
+                display: inline-block;
+                margin-right: 1rem;
+                padding: 0.8rem 1.5rem;
+                background: #D4AF37;
+                color: white;
+                font-size: 1rem;
+                font-weight: bold;
+                text-decoration: none;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+                transition: background 0.3s, transform 0.2s;
+            }
+
+            .daily-film-button:hover {
+                background: #E6D699;
+                transform: translateY(-2px);
+            }
+
+            .daily-film-button:active {
+                transform: translateY(1px);
+            }
+
+            .daily-film-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 1rem;
+            }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            margin-top: 3rem;
+            opacity: 0.9;
+        }
+
+        /* Movie Popup Modal Styles */
+        .movie-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .movie-popup {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .movie-popup-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #D4AF37;
+        }
+
+        .movie-popup-title {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .movie-popup-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/home.html" class="home-link" aria-label="Gå til hovedsiden">
+            <h1>Julevibber</h1>
+        </a>
+        <p class="tagline">Din portal til julestemning og moro! 🎅✨</p>
+        <div class="countdown">
+            Nedtelling til julaften: <br>
+            <span class="countdown-value" id="countdown"></span>
+        </div>
+        <div class="daily-film-container">
+            <a id="daily-film-link" class="daily-film-button" href="/index.html#julefilmkalender-day-1">Dagens filmluke: 1. desember</a>
+        </div>
+    </header>
+    
+    <main>
+        <div class="cards-container">
+            <a href="/index.html#top-filmer" class="card">
+                <div class="card-icon">🎬</div>
+                <h2 class="card-title">Filmer</h2>
+                <p class="card-description">Utforsk julefilmer med filmrulett og julefilmkalender</p>
+            </a>
+
+            <a href="/index.html#top-aktiviteter" class="card">
+                <div class="card-icon">🎨</div>
+                <h2 class="card-title">Aktiviteter</h2>
+                <p class="card-description">Finn morsomme juleaktiviteter og ideer for hele familien</p>
+            </a>
+
+            <a href="/index.html#top-julekalender" class="card">
+                <div class="card-icon">🎁</div>
+                <h2 class="card-title">Julekalender</h2>
+                <p class="card-description">Åpne en luke hver dag frem til julaften</p>
+            </a>
+
+            <a href="/index.html#top-julemusikk" class="card">
+                <div class="card-icon">🎵</div>
+                <h2 class="card-title">Julemusikk</h2>
+                <p class="card-description">Spillelister og juleradio for ekte julestemning.</p>
+            </a>
+        </div>
+    </main>
+    
+    <footer>
+        <p>God jul! 🎄❄️⭐</p>
+    </footer>
+
+    <!-- Movie Popup Modal -->
+    <div class="movie-popup-overlay" id="movie-popup-overlay" style="display:none;">
+        <div class="movie-popup">
+            <div class="movie-popup-header" id="movie-popup-header">Dagens filmluke</div>
+            <div class="movie-popup-title" id="movie-popup-title">Film tittel</div>
+            <button class="movie-popup-close" id="movie-popup-close">Lukk</button>
+        </div>
+    </div>
+    
+    <script>
+        // Create twinkling stars around header
+        function createStar() {
+            const header = document.querySelector('header');
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.textContent = '✨';
+            
+            const x = Math.random() * 100;
+            const y = Math.random() * 100 - 20;
+            
+            star.style.left = `${x}%`;
+            star.style.top = `${y}%`;
+            star.style.setProperty('--tx', `${Math.random() * 40 - 20}px`);
+            star.style.setProperty('--ty', `${Math.random() * 40 - 20}px`);
+            star.style.animationDelay = `${Math.random() * 0.5}s`;
+            
+            header.appendChild(star);
+            
+            setTimeout(() => {
+                star.remove();
+            }, 2500);
+        }
+        
+        setInterval(createStar, 400);
+        
+        // Countdown to December 24
+        function updateCountdown() {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            let christmas = new Date(currentYear, 11, 24);
+            
+            if (now > christmas) {
+                christmas = new Date(currentYear + 1, 11, 24);
+            }
+            
+            const diff = christmas - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            document.getElementById('countdown').textContent = 
+                `${days} dager, ${hours} timer, ${minutes} minutter`;
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        function updateDailyFilmLink() {
+            const now = new Date();
+            const today = now.getDate();
+            const month = now.getMonth();
+            const dailyFilmLink = document.getElementById('daily-film-link');
+
+            if (month === 11 && today >= 1 && today <= 24) {
+                dailyFilmLink.href = `/index.html#julefilmkalender-day-${today}`;
+                dailyFilmLink.textContent = `Dagens filmluke: ${today}. desember`;
+            } else {
+                dailyFilmLink.href = `/index.html#julefilmkalender-day-1`;
+                dailyFilmLink.textContent = `Dagens filmluke: 1. desember`;
+            }
+        }
+
+        updateDailyFilmLink();
+
+        // Movie popup functionality
+        const moviePopupOverlay = document.getElementById('movie-popup-overlay');
+        const moviePopupClose = document.getElementById('movie-popup-close');
+
+        function openMoviePopup(title) {
+            document.getElementById('movie-popup-title').textContent = title;
+            moviePopupOverlay.style.display = 'flex';
+        }
+
+        moviePopupClose.addEventListener('click', () => {
+            moviePopupOverlay.style.display = 'none';
+        });
+
+        // Open movie popup for today's movie on page load
+        window.addEventListener('load', () => {
+            const now = new Date();
+            const today = now.getDate();
+            const month = now.getMonth();
+
+            if (month === 11 && today >= 1 && today <= 24) {
+                // Here you would typically fetch the movie title from your data source
+                // For this example, we'll just use a placeholder title
+                const movieTitle = `Film for 24. desember`; // Placeholder title
+                openMoviePopup(movieTitle);
+            }
+        });
+
+        const defaultMovies = [
+            'Hjemme Alene',
+            'Hjemme Alene 2',
+            'Elf',
+            'The Polar Express',
+            'Love Actually',
+            'How the Grinch Stole Christmas',
+            'The Holiday',
+            'Klaus',
+            'A Christmas Carol',
+            'The Nightmare Before Christmas',
+            'Jingle All the Way',
+            'Miracle on 34th Street',
+            'A Charlie Brown Christmas',
+            'Arthur Christmas',
+            'Scrooged',
+            'Gremlins',
+            'National Lampoon’s Christmas Vacation',
+            'The Santa Clause',
+            'The Muppet Christmas Carol',
+            'Last Christmas',
+            'The Christmas Chronicles',
+            'Noelle',
+            'Christmas with the Kranks'
+        ];
+
+        function getTodaysMovieTitle() {
+            const now = new Date();
+            const month = now.getMonth();
+            const day = now.getDate();
+            if (month === 11 && day >= 1 && day <= 24) {
+                return defaultMovies[day - 1] || 'Film';
+            }
+            return defaultMovies[0];
+        }
+
+        function showMoviePopup(title) {
+            document.getElementById('movie-popup-title').textContent = title;
+            document.getElementById('movie-popup-overlay').style.display = 'flex';
+        }
+        document.getElementById('movie-popup-close').onclick = function() {
+            document.getElementById('movie-popup-overlay').style.display = 'none';
+        };
+        document.getElementById('daily-film-link').onclick = function(e) {
+            e.preventDefault();
+            showMoviePopup(getTodaysMovieTitle());
+        };
+    </script>
+</body>
+</html>

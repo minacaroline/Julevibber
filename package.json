@@ -1,0 +1,13 @@
+{
+  "name": "julevibber-2",
+  "version": "1.0.0",
+  "description": "Julevibber root project",
+  "scripts": {
+    "dev": "cd Julevibber && npm run dev",
+    "build": "cd Julevibber && npm run build",
+    "start": "cd Julevibber && npm start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julevibber</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: #8E0C0C;
+            color: white;
+        }
+        
+        header {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: visible;
+        }
+        header a.home-link { text-decoration: none; color: inherit; display: inline-block; cursor: pointer; }
+        
+        .star {
+            position: absolute;
+            font-size: 0.8rem;
+            animation: twinkle 2s ease-in-out forwards;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        @keyframes twinkle {
+            0% {
+                opacity: 0;
+                transform: translate(0, 0) scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(var(--tx), var(--ty)) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(calc(var(--tx) * 1.5), calc(var(--ty) * 1.5)) scale(0.5);
+            }
+        }
+        
+        h1 {
+            font-family: 'Cinzel Decorative', cursive;
+            font-weight: 900;
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(45deg, #D4AF37, #F4E4B0, #D4AF37, #E6D699);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8))
+                    drop-shadow(0 0 25px rgba(255, 215, 0, 0.6))
+                    drop-shadow(0 0 35px rgba(255, 215, 0, 0.4))
+                    drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+            animation: shimmer 3s ease-in-out infinite, glow 2s ease-in-out infinite alternate;
+            text-shadow: 
+                1px 1px 0 rgba(139, 115, 85, 0.3),
+                2px 2px 0 rgba(139, 115, 85, 0.2),
+                3px 3px 0 rgba(139, 115, 85, 0.1);
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes glow {
+            0% {
+                filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3))
+                        drop-shadow(0 0 10px rgba(255, 215, 0, 0.2))
+                        drop-shadow(0 0 15px rgba(255, 215, 0, 0.1))
+                        drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+            }
+            100% {
+                filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.45))
+                        drop-shadow(0 0 15px rgba(255, 215, 0, 0.35))
+                        drop-shadow(0 0 20px rgba(255, 215, 0, 0.25))
+                        drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+            }
+        }
+        
+        .countdown {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .countdown-value {
+            font-weight: bold;
+            font-size: 2rem;
+        }
+        
+        nav {
+            background: #9c2323;
+            padding: 2rem 0 2rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6rem;
+            border-top: 1px solid #b44a4a;
+            border-bottom: 1px solid #b44a4a;
+        }
+        }
+        
+        nav a {
+            color: #fff !important;
+            text-decoration: none !important;
+            font-size: 30rem;
+            padding: 0.7rem 3rem;
+            border-radius: 0;
+            font-weight: 900;
+            background: none;
+            border: none;
+            box-shadow: none;
+            transition: background 0.2s, border-radius 0.2s;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            letter-spacing: 0.03em;
+            font-family: inherit;
+        }
+
+        nav a,
+        nav a:visited,
+        nav a:active,
+        nav a:hover {
+            color: #fff !important;
+            text-decoration: none !important;
+        }
+        }
+        
+        nav a:hover, nav a.active {
+            background: rgba(255,255,255,0.18);
+            color: #fff !important;
+            text-decoration: none !important;
+            border-radius: 16px;
+        }
+        
+        /* Submenu for Filmer */
+        .subnav {
+            margin-top: 0.25rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .subnav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.25rem;
+            font-weight: 700;
+            padding: 0.6rem 1.25rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            background: rgba(255, 255, 255, 0.12);
+            transition: background 0.3s, border-color 0.3s, transform .05s;
+        }
+        .subnav a:hover, .subnav a.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.35);
+        }
+        #filmer .section-content { padding-top: 1rem; }
+        .subsection h3 { font-size: 2rem; margin: .5rem 0 1rem; }
+        
+        .content {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section-content {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Subsections under Filmer */
+        .subsection { display: none; margin-top: 1rem; }
+        .subsection.active { display: block; }
+
+        /* Filmrulett styles */
+        .rulette-controls { display: flex; flex-direction: column; gap: 1rem; align-items: center; margin-top: 1rem; }
+        .wheel-container { position: relative; width: 360px; height: 360px; display: grid; place-items: center; }
+        .wheel { width: 100%; height: 100%; display: block; border-radius: 50%; box-shadow: 0 8px 30px rgba(0,0,0,.35), inset 0 0 30px rgba(255,255,255,.15); will-change: transform; }
+        .wheel-pointer { position: absolute; top: -6px; left: 50%; transform: translateX(-50%); font-size: 1.2rem; text-shadow: 0 2px 6px rgba(0,0,0,.5); }
+        .btn { cursor: pointer; padding: .6rem 1rem; border-radius: 6px; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.12); color: #fff; transition: background .2s, transform .05s; }
+        .btn:hover { background: rgba(255,255,255,.2); }
+        .btn:active { transform: translateY(1px); }
+        .btn.primary { background: #c02a2a; border-color: rgba(0,0,0,.2); }
+        .btn.primary:hover { background: #d53636; }
+        .btn.big { font-size: 1.2rem; padding: .9rem 1.6rem; }
+        .rulette-actions { display: flex; gap: .75rem; flex-wrap: wrap; }
+        .rulette-result { margin-top: 1rem; font-size: 1.6rem; font-weight: 700; text-shadow: 0 2px 6px rgba(0,0,0,.35); min-height: 2.2rem; }
+        .rulette-result.reveal { animation: pop 300ms ease-out; }
+        @keyframes pop { 0%{transform: scale(.9); opacity:.6} 100%{transform: scale(1); opacity:1} }
+        .rulette-history { margin-top: .5rem; opacity: .9; font-size: .95rem; }
+        .rulette-history ul { margin-top: .4rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: .4rem .8rem; }
+        .rulette-history li { list-style: none; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 6px; padding: .4rem .6rem; }
+
+        /* Julefilmkalender styles */
+        .calendar-controls { display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 1rem; }
+        .calendar-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: .5rem; margin-bottom: .5rem; opacity: .9; font-size: .95rem; }
+        .calendar-weekdays div { text-align: center; font-weight: 700; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: .5rem; grid-auto-rows: 110px; }
+        @media (max-width: 720px) { .calendar-grid { grid-auto-rows: 90px; } }
+        .day-card { position: relative; padding: .75rem; border-radius: 10px; border: 1px solid rgba(255,255,255,.2); background: linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,.06)); display: flex; align-items: center; justify-content: center; text-align: center; cursor: pointer; transition: transform .08s ease, background .2s, box-shadow .2s, border-color .2s; }
+        .day-card:hover { background: linear-gradient(160deg, rgba(255,255,255,.2), rgba(255,255,255,.08)); }
+        .day-card:active { transform: translateY(1px); }
+        .day-card.empty { border: none; background: none; cursor: default; pointer-events: none; }
+        .day-num { font-size: 2.5rem; font-weight: 900; opacity: .98; text-shadow: 0 1px 2px rgba(0,0,0,.35); }
+        .day-card.weekend { background: linear-gradient(160deg, rgba(255,255,255,.18), rgba(255,255,255,.08)); border-color: rgba(255,255,255,.28); }
+        .day-card.weekend:hover { background: linear-gradient(160deg, rgba(255,255,255,.24), rgba(255,255,255,.12)); }
+        .day-card.weekend .day-num { color: #F4E4B0; }
+        .day-card.is-24 { border-color: rgba(255, 215, 0, .65); box-shadow: 0 0 0 2px rgba(255,215,0,.14), 0 10px 28px rgba(0,0,0,.28); background: linear-gradient(160deg, rgba(255,255,255,.24), rgba(255,255,255,.12)); }
+        .day-card.is-24:hover { box-shadow: 0 0 0 2px rgba(255,215,0,.2), 0 12px 32px rgba(0,0,0,.32); }
+        .day-card.is-24 .day-num { font-size: 2.5rem; color: #FFD700; text-shadow: 0 0 10px rgba(255,215,0,.55), 0 2px 4px rgba(0,0,0,.35); }
+        .day-film { display: none; font-weight: 700; font-size: 1.1rem; line-height: 1.4; }
+        .day-card.revealed .day-num { display: none; }
+        .day-card.revealed .day-film { display: block; }
+        .legend { margin-top: .75rem; opacity: .9; font-size: .95rem; }
+
+        /* Julemusikk styles */
+        .music-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: .75rem; }
+        .music-card { background: linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,.06)); border: 1px solid rgba(255,255,255,.2); border-radius: 10px; padding: 1rem; display: flex; flex-direction: column; gap: .5rem; }
+        .music-title { font-weight: 800; font-size: 1.2rem; }
+        .music-desc { opacity: .95; font-size: .95rem; }
+        .music-actions { margin-top: .25rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+
+        /* Movie popup modal */
+        .movie-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .movie-popup-overlay.active {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .movie-popup {
+            background: linear-gradient(160deg, #2d5016 0%, #1a3d0f 100%);
+            border: 3px solid #D4AF37;
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                0 0 30px rgba(212, 175, 55, 0.3);
+            animation: popupSlide 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes popupSlide {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        .movie-popup-header {
+            font-size: 1.2rem;
+            color: #F4E4B0;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .movie-popup-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #FFD700;
+            margin-bottom: 2rem;
+            line-height: 1.3;
+            text-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(255, 215, 0, 0.4);
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+        @keyframes titleGlow {
+            from {
+                text-shadow: 
+                    0 2px 4px rgba(0, 0, 0, 0.5),
+                    0 0 20px rgba(255, 215, 0, 0.3);
+            }
+            to {
+                text-shadow: 
+                    0 2px 4px rgba(0, 0, 0, 0.5),
+                    0 0 30px rgba(255, 215, 0, 0.6);
+            }
+        }
+        .movie-popup-decorations {
+            position: absolute;
+            top: 1rem;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            font-size: 1.5rem;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+        .movie-popup-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 0.5rem;
+        }
+        .movie-popup-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        .movie-popup-close:active {
+            transform: translateY(0);
+        }
+        .movie-popup-streaming {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .movie-popup-streaming-label {
+            font-size: 1rem;
+            color: #F4E4B0;
+            margin-bottom: 0.75rem;
+            opacity: 0.9;
+        }
+        .streaming-links {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .streaming-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .streaming-link:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        .streaming-link:active {
+            transform: translateY(0);
+        }
+        .streaming-icon {
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/home.html" class="home-link" aria-label="Gå til hovedsiden">
+            <h1>Julevibber</h1>
+        </a>
+        <div class="countdown">
+            Nedtelling til julaften: <br>
+            <span class="countdown-value" id="countdown"></span>
+        </div>
+    </header>
+    
+    <nav>
+        <a href="#filmer" class="nav-link active" data-section="filmer">Filmer</a>
+        <a href="#aktiviteter" class="nav-link" data-section="aktiviteter">Aktiviteter</a>
+        <a href="#julekalender" class="nav-link" data-section="julekalender">Julekalender</a>
+        <a href="#julemusikk" class="nav-link" data-section="julemusikk">Julemusikk</a>
+    </nav>
+    
+    <div class="content">
+        <section id="filmer" class="section active">
+            <div style="display: flex; align-items: center; gap: 2rem;">
+                <a href="#julefilmkalender" style="text-decoration: none; color: inherit;"><h2 style="margin-bottom: 0;">Julefilmkalender</h2></a>
+                <button id="show-filmrulett" class="btn big primary" style="font-size: 1.5rem; padding: 1rem 2.5rem;">Julefilmrulett</button>
+            </div>
+            <div class="section-content" style="padding-top: 1rem;">
+                <div id="filmrulett" class="subsection" role="region" aria-labelledby="filmrulett-tab" style="display:none;">
+                    <h3 id="filmrulett-tab">Filmrulett</h3>
+                    <p>La oss trekke en tilfeldig julefilm å se i kveld!</p>
+
+                    <div class="rulette-controls">
+                        <div class="wheel-container">
+                            <canvas id="rulette-canvas" class="wheel" width="360" height="360"></canvas>
+                            <div class="wheel-pointer">▲</div>
+                        </div>
+                        <div class="rulette-actions">
+                            <button class="btn primary big" id="draw-movie">Trekk film</button>
+                            <button class="btn" id="reset-rulette">Nullstill</button>
+                        </div>
+                    </div>
+                    <div id="rulette-result" class="rulette-result" aria-live="polite"></div>
+                    <div class="rulette-history">
+                        <strong>Trukket:</strong>
+                        <ul id="rulette-history"></ul>
+                    </div>
+                </div>
+
+                <div id="julefilmkalender" class="subsection active" role="region" aria-labelledby="julefilmkalender-tab" style="display:block; margin-top: 0;">
+                    <!-- No controls, static movie list loaded from julefilmer.json -->
+                    <div class="calendar-weekdays" aria-hidden="true">
+                        <div>Man</div>
+                        <div>Tirs</div>
+                        <div>Ons</div>
+                        <div>Tors</div>
+                        <div>Fre</div>
+                        <div>Lør</div>
+                        <div>Søn</div>
+                    </div>
+                    <div id="calendar-grid" class="calendar-grid" aria-live="polite"></div>
+                    <div class="legend">Trykk på en dag for å avsløre filmen.</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="aktiviteter" class="section">
+            <h2>Aktiviteter</h2>
+            <div class="section-content">
+                <p>Her finner du juleaktiviteter og ideer...</p>
+            </div>
+        </section>
+        
+        <section id="julekalender" class="section">
+            <h2>Julekalender</h2>
+            <div class="section-content">
+                <p>Åpne en luke hver dag frem til jul.</p>
+                <div class="calendar-weekdays" aria-hidden="true">
+                    <div>Man</div>
+                    <div>Tirs</div>
+                    <div>Ons</div>
+                    <div>Tors</div>
+                    <div>Fre</div>
+                    <div>Lør</div>
+                    <div>Søn</div>
+                </div>
+                <div id="advent-calendar-grid" class="calendar-grid" aria-live="polite"></div>
+            </div>
+        </section>
+        
+        <section id="julemusikk" class="section">
+            <h2>Julemusikk</h2>
+            <div class="section-content">
+                <div id="music-grid" class="music-grid" aria-live="polite"></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Movie Popup Modal -->
+    <div class="movie-popup-overlay" id="movie-popup-overlay">
+        <div class="movie-popup">
+            <div class="movie-popup-decorations">
+                <span>🎄</span>
+                <span>⭐</span>
+                <span>🎁</span>
+                <span>❄️</span>
+                <span>🎄</span>
+            </div>
+            <div class="movie-popup-header" id="movie-popup-header">I kveld ser vi</div>
+            <div class="movie-popup-title" id="movie-popup-title">Film tittel</div>
+            <div class="movie-popup-streaming" id="movie-popup-streaming">
+                <div class="movie-popup-streaming-label">Tilgjengelig på:</div>
+                <div class="streaming-links" id="streaming-links"></div>
+            </div>
+            <button class="movie-popup-close" id="movie-popup-close">Flott! 🎬</button>
+        </div>
+    </div>
+    
+    <script>
+        // Create twinkling stars around header
+        function createStar() {
+            const header = document.querySelector('header');
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.textContent = '✨';
+            
+            // Random position across the entire top area
+            const x = Math.random() * 100; // 0 to 100%
+            const y = Math.random() * 100 - 20; // -20 to 80
+            
+            star.style.left = `${x}%`;
+            star.style.top = `${y}%`;
+            star.style.setProperty('--tx', `${Math.random() * 40 - 20}px`);
+            star.style.setProperty('--ty', `${Math.random() * 40 - 20}px`);
+            star.style.animationDelay = `${Math.random() * 0.5}s`;
+            
+            header.appendChild(star);
+            
+            // Remove star after animation completes
+            setTimeout(() => {
+                star.remove();
+            }, 2500);
+        }
+        
+        // Create stars periodically
+        setInterval(createStar, 400);
+        
+        // Countdown to December 24
+        function updateCountdown() {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            let christmas = new Date(currentYear, 11, 24); // Month is 0-indexed
+            
+            // If Christmas has passed this year, count to next year
+            if (now > christmas) {
+                christmas = new Date(currentYear + 1, 11, 24);
+            }
+            
+            const diff = christmas - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            document.getElementById('countdown').textContent = 
+                `${days} dager, ${hours} timer, ${minutes} minutter`;
+        }
+        
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
+        // Navigation functionality with deep-link support
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.section');
+        
+        const filmerSection = document.getElementById('filmer');
+        const subnavLinks = filmerSection.querySelectorAll('.subnav-link');
+        const subsections = filmerSection.querySelectorAll('.subsection');
+
+        const activateSection = (id) => {
+            navLinks.forEach(l => l.classList.remove('active'));
+            sections.forEach(s => s.classList.remove('active'));
+            const link = Array.from(navLinks).find(l => l.getAttribute('data-section') === id);
+            if (link) link.classList.add('active');
+            const sectionEl = document.getElementById(id);
+            if (sectionEl) sectionEl.classList.add('active');
+        };
+
+        const activateSubsection = (id) => {
+            subnavLinks.forEach(l => l.classList.remove('active'));
+            subsections.forEach(s => s.classList.remove('active'));
+            const link = Array.from(subnavLinks).find(l => l.getAttribute('data-subsection') === id);
+            if (link) link.classList.add('active');
+            const subEl = filmerSection.querySelector(`#${id}`);
+            if (subEl) subEl.classList.add('active');
+        };
+
+        const handleHash = () => {
+            const raw = window.location.hash.replace(/^#/, '').trim();
+            const subsectionIds = new Set(['filmrulett','julefilmkalender']);
+            const sectionIds = new Set(['filmer','aktiviteter','julekalender','julemusikk']);
+
+            // Special aliases used from home page to avoid anchor scroll
+            if (raw === 'top-filmer') {
+                activateSection('filmer');
+                activateSubsection('filmrulett');
+                return;
+            }
+            if (raw === 'top-aktiviteter') {
+                activateSection('aktiviteter');
+                return;
+            }
+            if (raw === 'top-julekalender') {
+                activateSection('julekalender');
+                return;
+            }
+            if (raw === 'top-julemusikk') {
+                activateSection('julemusikk');
+                return;
+            }
+
+            if (subsectionIds.has(raw)) {
+                activateSection('filmer');
+                activateSubsection(raw);
+                return;
+            }
+            if (sectionIds.has(raw)) {
+                activateSection(raw);
+                // default subsection when going to Filmer via hash
+                if (raw === 'filmer') activateSubsection('julefilmkalender');
+                return;
+            }
+            // No/unknown hash: keep defaults already in markup
+        };
+
+        // Click handlers: sync UI and URL hash
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const sectionId = link.getAttribute('data-section');
+                window.location.hash = `#${sectionId}`;
+            });
+        });
+
+        subnavLinks.forEach(slink => {
+            slink.addEventListener('click', (e) => {
+                e.preventDefault();
+                const id = slink.getAttribute('data-subsection');
+                // ensure Filmer section visible and set subsection via hash
+                window.location.hash = `#${id}`;
+            });
+        });
+
+        window.addEventListener('hashchange', handleHash);
+        // Apply initial hash if present
+        handleHash();
+
+        // --- Movie Popup ---
+        const movieStreamingData = {
+            'Hjemme Alene': [{ service: 'Disney+', url: 'https://www.disneyplus.com', icon: '🎬' }],
+            'Hjemme Alene 2': [{ service: 'Disney+', url: 'https://www.disneyplus.com', icon: '🎬' }],
+            'Elf': [{ service: 'HBO Max', url: 'https://www.max.com', icon: '🎬' }],
+            'The Polar Express': [{ service: 'HBO Max', url: 'https://www.max.com', icon: '🎬' }],
+            'Love Actually': [{ service: 'Netflix', url: 'https://www.netflix.com', icon: '🎬' }, { service: 'Prime Video', url: 'https://www.primevideo.com', icon: '🎬' }],
+            'How the Grinch Stole Christmas': [{ service: 'Netflix', url: 'https://www.netflix.com', icon: '🎬' }],
+            'The Holiday': [{ service: 'Netflix', url: 'https://www.netflix.com', icon: '🎬' }],
+            'Klaus': [{ service: 'Netflix', url: 'https://www.netflix.com', icon: '🎬' }],
+            'A Christmas Carol': [{ service: 'Disney+', url: 'https://www.disneyplus.com', icon: '🎬' }],
+            'The Nightmare Before Christmas': [{ service: 'Disney+', url: 'https://www.disneyplus.com', icon: '🎬' }],
+            'Jingle All the Way': [{ service: 'Disney+', url: 'https://www.disneyplus.com', icon: '🎬' }],
+            'Miracle on 34th Street': [{ service: 'Disney+', url: 'https://www.disneyplus.com', icon: '🎬' }],
+            'A Charlie Brown Christmas': [{ service: 'Apple TV+', url: 'https://tv.apple.com', icon: '🎬' }],
+            'Arthur Christmas': [{ service: 'Netflix', url: 'https://www.netflix.com', icon: '🎬' }],
+            'Scrooged': [{ service: 'Prime Video', url: 'https://www.primevideo.com', icon: '🎬' }],
+            'Gremlins': [{ service: 'HBO Max', url: 'https://www.max.com', icon: '🎬' }],
+            "National Lampoon's Christmas Vacation": [{ service: 'HBO Max', url: 'https://www.max.com', icon: '🎬' }],
+            'The Santa Clause': [{ service: 'Disney+', url: 'https://www.disneyplus.com', icon: '🎬' }],
+            'The Muppet Christmas Carol': [{ service: 'Disney+', url: 'https://www.disneyplus.com', icon: '🎬' }],
+            'Last Christmas': [{ service: 'Netflix', url: 'https://www.netflix.com', icon: '🎬' }],
+            'The Christmas Chronicles': [{ service: 'Netflix', url: 'https://www.netflix.com', icon: '🎬' }],
+            'Noelle': [{ service: 'Disney+', url: 'https://www.disneyplus.com', icon: '🎬' }],
+            'Christmas with the Kranks': [{ service: 'Prime Video', url: 'https://www.primevideo.com', icon: '🎬' }]
+        };
+
+        const showMoviePopup = (movieTitle, showRerollButton = true, isCalendar = false) => {
+            const overlay = document.getElementById('movie-popup-overlay');
+            const titleEl = document.getElementById('movie-popup-title');
+            const streamingContainer = document.getElementById('movie-popup-streaming');
+            const streamingLinks = document.getElementById('streaming-links');
+            const headerEl = document.getElementById('movie-popup-header');
+            const closeBtn = document.getElementById('movie-popup-close');
+
+            // Store calendar state on overlay for close handler
+            overlay.dataset.isCalendar = isCalendar;
+
+            // Configure header/button for movie context
+            if (headerEl) headerEl.textContent = 'I kveld ser vi';
+            if (closeBtn) closeBtn.textContent = 'Lukk';
+
+            // Add or remove 'Snurr på nytt' button based on showRerollButton parameter
+            let rerollBtn = document.getElementById('reroll-movie');
+            if (showRerollButton) {
+                if (!rerollBtn) {
+                    rerollBtn = document.createElement('button');
+                    rerollBtn.id = 'reroll-movie';
+                    rerollBtn.className = 'movie-popup-close';
+                    rerollBtn.textContent = 'Snurr på nytt';
+                    closeBtn.parentNode.insertBefore(rerollBtn, closeBtn);
+                    rerollBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        // Close popup
+                        document.getElementById('movie-popup-overlay').classList.remove('active');
+                        // Show wheel (already visible, but ensure focus)
+                        // Trigger new draw and show popup after wheel stops
+                        const drawBtn = document.getElementById('draw-movie');
+                        if (drawBtn) {
+                            // Listen for result update
+                            const resultBox = document.getElementById('rulette-result');
+                            const observer = new MutationObserver(function(mutations) {
+                                for (const m of mutations) {
+                                    if (m.type === 'childList' && resultBox.textContent.trim()) {
+                                        // Show popup with new movie
+                                        showMoviePopup(resultBox.textContent.replace('🎬','').trim(), true);
+                                        observer.disconnect();
+                                        break;
+                                    }
+                                }
+                            });
+                            observer.observe(resultBox, { childList: true });
+                            drawBtn.click();
+                        }
+                    });
+                }
+                rerollBtn.style.display = '';
+            } else {
+                if (rerollBtn) {
+                    rerollBtn.style.display = 'none';
+                }
+            }
+
+            titleEl.textContent = movieTitle;
+
+            // Clear previous streaming links
+            streamingLinks.innerHTML = '';
+
+            // Add streaming links if available
+            const services = movieStreamingData[movieTitle];
+            if (services && services.length > 0) {
+                streamingContainer.style.display = 'block';
+                services.forEach(({ service, url, icon }) => {
+                    const link = document.createElement('a');
+                    link.className = 'streaming-link';
+                    link.href = url;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                    link.innerHTML = `<span class="streaming-icon">${icon}</span><span>${service}</span>`;
+                    streamingLinks.appendChild(link);
+                });
+            } else {
+                streamingContainer.style.display = 'none';
+            }
+
+            overlay.classList.add('active');
+        };
+
+        const closeMoviePopup = () => {
+            const overlay = document.getElementById('movie-popup-overlay');
+            const isCalendar = overlay.dataset.isCalendar === 'true';
+            overlay.classList.remove('active');
+            
+            // If this is from calendar, trigger calendar close handler
+            if (isCalendar && window.calendarCloseHandler) {
+                window.calendarCloseHandler();
+            }
+        };
+
+        document.getElementById('movie-popup-close').addEventListener('click', closeMoviePopup);
+        document.getElementById('movie-popup-overlay').addEventListener('click', (e) => {
+            if (e.target.id === 'movie-popup-overlay') {
+                closeMoviePopup();
+            }
+        });
+
+        // --- Film lists and helpers ---
+        const defaultMovies = [
+            'Hjemme Alene',
+            'Hjemme Alene 2',
+            'Elf',
+            'The Polar Express',
+            'Love Actually',
+            'How the Grinch Stole Christmas',
+            'The Holiday',
+            'Klaus',
+            'A Christmas Carol',
+            'The Nightmare Before Christmas',
+            'Jingle All the Way',
+            'Miracle on 34th Street',
+            'A Charlie Brown Christmas',
+            'Arthur Christmas',
+            'Scrooged',
+            'Gremlins',
+            'National Lampoon’s Christmas Vacation',
+            'The Santa Clause',
+            'The Muppet Christmas Carol',
+            'Last Christmas',
+            'The Christmas Chronicles',
+            'Noelle',
+            'Christmas with the Kranks'
+        ];
+
+        const shuffle = (arr) => arr
+            .map(value => ({ value, sort: Math.random() }))
+            .sort((a, b) => a.sort - b.sort)
+            .map(({ value }) => value);
+
+        // --- Filmrulett ---
+        (function initRulette(){
+            const drawBtn = document.getElementById('draw-movie');
+            const resetBtn = document.getElementById('reset-rulette');
+            const resultBox = document.getElementById('rulette-result');
+            const historyList = document.getElementById('rulette-history');
+            const canvas = document.getElementById('rulette-canvas');
+            const ctx = canvas.getContext('2d');
+
+            let pool = [];
+            let history = [];
+            let drawn = new Set(); // internal tracking to prevent repeats
+            let angle = 0; // radians
+
+            const TAU = Math.PI * 2;
+            const center = { x: canvas.width / 2, y: canvas.height / 2 };
+            const radius = Math.min(center.x, center.y) - 6;
+
+            const renderHistory = () => {
+                historyList.innerHTML = '';
+                history.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    historyList.appendChild(li);
+                });
+            };
+
+            // Load movie list from julefilmer_exact.json
+            let movieListPromise = fetch('julefilmer_exact.json', { cache: 'no-store' })
+                .then(res => res.ok ? res.json() : [])
+                .catch(() => []);
+
+            const ensurePool = async () => {
+                const movies = await movieListPromise;
+                pool = movies.filter(m => !drawn.has(m));
+            };
+
+            // Offscreen buffer to avoid redrawing complex slices each frame
+            let bufferCanvas = document.createElement('canvas');
+            let bctx = bufferCanvas.getContext('2d');
+            let bufferKey = '';
+
+            const rebuildWheelBuffer = (labels) => {
+                const n = labels.length || 1;
+                const slice = TAU / n;
+                const icons = ['🎄','🎁','❄️','⭐','🦌','⛄','🔔','🍪','🕯️','🧣','🍬','🎅','🧦','🍫','🥛'];
+
+                bufferCanvas.width = canvas.width;
+                bufferCanvas.height = canvas.height;
+                bctx.clearRect(0, 0, bufferCanvas.width, bufferCanvas.height);
+
+                for (let i = 0; i < n; i++) {
+                    const start = i * slice;
+                    const end = start + slice;
+                    // slice fill
+                    bctx.beginPath();
+                    bctx.moveTo(center.x, center.y);
+                    bctx.arc(center.x, center.y, radius, start, end);
+                    const even = i % 2 === 0;
+                    bctx.fillStyle = even ? 'rgba(255,255,255,0.18)' : 'rgba(0,0,0,0.18)';
+                    bctx.fill();
+                    bctx.closePath();
+
+                    // icon position (will rotate with wheel during render)
+                    const mid = start + slice / 2;
+                    const ix = center.x + Math.cos(mid) * (radius - 44);
+                    const iy = center.y + Math.sin(mid) * (radius - 44);
+                    bctx.textAlign = 'center';
+                    bctx.textBaseline = 'middle';
+                    bctx.fillStyle = '#fff';
+                    bctx.font = '24px "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", Arial, sans-serif';
+                    bctx.fillText(icons[i % icons.length], ix, iy);
+                }
+
+                bufferKey = `n:${n}`; // simple key for current configuration
+            };
+
+            const paintBuffer = () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(bufferCanvas, 0, 0);
+            };
+            const applyRotation = () => {
+                canvas.style.transform = `rotate(${angle}rad)`;
+            };
+
+            const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+            const spinToIndex = (labels, index) => new Promise((resolve) => {
+                const n = Math.max(labels.length, 1);
+                const slice = TAU / n;
+                const startAngle = angle;
+                // target places chosen slice centered at pointer (pointer is at -90deg)
+                const sliceStart = index * slice;
+                const sliceCenter = sliceStart + slice / 2;
+                const pointerAngle = -Math.PI / 2; // top
+                // choose full spins 3-5 for nice effect
+                const fullSpins = 3 + Math.floor(Math.random() * 3);
+                const targetAngle = (pointerAngle - sliceCenter) + fullSpins * TAU;
+                const delta = targetAngle - startAngle;
+                const duration = Math.min(3600, 1800 + n * 35); // ms
+                const start = performance.now();
+
+                const step = (now) => {
+                    const t = Math.min(1, (now - start) / duration);
+                    const eased = easeOutCubic(t);
+                    angle = startAngle + delta * eased;
+                    applyRotation();
+                    if (t < 1) {
+                        requestAnimationFrame(step);
+                    } else {
+                        // normalize angle to [0, TAU)
+                        angle = ((angle % TAU) + TAU) % TAU;
+                        applyRotation();
+                        resolve();
+                    }
+                };
+                requestAnimationFrame(step);
+            });
+
+            resetBtn.addEventListener('click', async () => {
+                history = [];
+                drawn = new Set();
+                renderHistory();
+                await ensurePool();
+                resultBox.textContent = '';
+                angle = 0;
+                canvas.style.transform = 'rotate(0rad)';
+                rebuildWheelBuffer(pool.length ? pool : ['']);
+                paintBuffer();
+            });
+
+            drawBtn.addEventListener('click', async () => {
+                await ensurePool();
+                if (!pool.length) {
+                    resultBox.textContent = 'Ingen filmer igjen å trekke. Nullstill for å starte på nytt.';
+                    return;
+                }
+                // choose from current pool and spin wheel with current labels
+                const labels = [...pool];
+                const idx = Math.floor(Math.random() * labels.length);
+                await spinToIndex(labels, idx);
+                const picked = labels[idx];
+                // update state after spin
+                drawn.add(picked);
+                pool = pool.filter(m => m !== picked);
+                history = [picked]; // clear previous searches and show only current
+                renderHistory();
+                resultBox.classList.remove('reveal');
+                void resultBox.offsetWidth; // restart animation
+                resultBox.textContent = `🎬 ${picked}`;
+                resultBox.classList.add('reveal');
+                // redraw wheel for remaining pool
+                rebuildWheelBuffer(pool.length ? pool : ['']);
+                paintBuffer();
+                // Show popup with movie title (with reroll button for roulette)
+                showMoviePopup(picked, true);
+            });
+
+            // initial state
+            ensurePool().then(() => {
+                rebuildWheelBuffer(pool);
+                paintBuffer();
+                applyRotation();
+            });
+        })();
+
+        // --- Julefilmkalender ---
+        (function initCalendar(){
+            const grid = document.getElementById('calendar-grid');
+            let revealed = new Set();
+            let calendarAssignments = [];
+
+            async function loadMovies() {
+                try {
+                    const res = await fetch('julefilmer_exact.json', { cache: 'no-store' });
+                    if (!res.ok) throw new Error('Failed to load julefilmer_exact.json');
+                    const data = await res.json();
+                    if (!Array.isArray(data)) throw new Error('Invalid julefilmer_exact.json format');
+                    return data;
+                } catch (e) {
+                    // fallback to default
+                    return [
+                        "A boy called christmas",
+                        "The christmas chronicles",
+                        "Alene hjemme",
+                        "The santa clause",
+                        "Elf",
+                        "Jul i flåklypa",
+                        "Klaus",
+                        "Holidate",
+                        "Jingle Jangle",
+                        "Last Christmas",
+                        "A christmas carol",
+                        "The santa clause 2",
+                        "The santa clause 3",
+                        "Love Actually",
+                        "Arthur Christmas",
+                        "The holiday",
+                        "Fred Claus",
+                        "Polarekspressen",
+                        "Christmas with the kranks",
+                        "Hjeme alene 2",
+                        "Hjemme alene 3",
+                        "The Grinch",
+                        "Hjelp det er juleferie",
+                        "The Christmas Chronicles 2"
+                    ];
+                }
+            }
+
+            function render(assignments) {
+                grid.innerHTML = '';
+                const now = new Date();
+                const year = now.getFullYear();
+                const decStart = new Date(year, 11, 1); // Dec 1
+                const daysInDec = new Date(year, 12, 0).getDate(); // 31
+                // Monday-first index (Mon=0..Sun=6)
+                const offset = (decStart.getDay() + 6) % 7;
+                const totalCells = Math.ceil((offset + daysInDec) / 7) * 7;
+                for (let i = 0; i < totalCells; i++) {
+                    const dayNum = i - offset + 1; // 1..daysInDec in December
+                    // Empty cells for days before Dec and for all days after 24
+                    if (dayNum < 1 || dayNum > 24) {
+                        const empty = document.createElement('div');
+                        empty.className = 'day-card empty';
+                        empty.setAttribute('aria-hidden', 'true');
+                        grid.appendChild(empty);
+                        continue;
+                    }
+                    const card = document.createElement('button');
+                    card.className = 'day-card';
+                    card.setAttribute('type', 'button');
+                    card.setAttribute('aria-pressed', revealed.has(dayNum) ? 'true' : 'false');
+                    // Apply weekend/24th classes
+                    const thisDate = new Date(year, 11, dayNum);
+                    const dow = thisDate.getDay(); // 0 Sun .. 6 Sat
+                    if (dow === 0 || dow === 6) card.classList.add('weekend');
+                    if (dayNum === 24) card.classList.add('is-24');
+                    const num = document.createElement('div');
+                    num.className = 'day-num';
+                    num.textContent = dayNum.toString();
+                    const film = document.createElement('div');
+                    film.className = 'day-film';
+                    film.textContent = assignments[dayNum - 1] || '\ud83c\udfac Film';
+                    if (revealed.has(dayNum)) card.classList.add('revealed');
+                    card.addEventListener('click', () => {
+                        const wasRevealed = revealed.has(dayNum);
+                        if (wasRevealed) {
+                            // If already revealed, hide it
+                            revealed.delete(dayNum);
+                            render(assignments);
+                        } else {
+                            // Show the movie
+                            revealed.clear();
+                            revealed.add(dayNum);
+                            render(assignments);
+                            // Show popup without reroll button for calendar
+                            const movieTitle = assignments[dayNum - 1] || 'Film';
+                            showMoviePopup(movieTitle, false, true);
+                        }
+                    });
+                    card.appendChild(num);
+                    card.appendChild(film);
+                    grid.appendChild(card);
+                }
+            }
+
+            loadMovies().then(assignments => {
+                calendarAssignments = assignments;
+                render(assignments);
+            });
+
+            // Handler to hide revealed state when popup closes
+            window.calendarCloseHandler = () => {
+                revealed.clear();
+                render(calendarAssignments);
+            };
+        })();
+
+        // --- Julekalender (1–24) ---
+        (async function initAdventCalendar(){
+            const grid = document.getElementById('advent-calendar-grid');
+            if (!grid) return;
+            const defaultAdventItems = [
+                { text: '1. Lag pepperkaker eller pepperkakehus 🍪' },
+                { text: '2. Skriv og send julekort ✉️' },
+                { text: '3. Se på julelys i nabolaget ✨' },
+                { text: '4. Brett papirsnøfnugg og pynt vinduet ❄️' },
+                { text: '5. Drikk kakao med krem ☕' },
+                { text: '6. Hør på julesanger og syng med 🎶' },
+                { text: '7. Pakk inn gaver med kreativt papir 🎁' },
+                { text: '8. Lag hjemmelaget julepynt 🎨' },
+                { text: '9. Se en klassisk julefilm sammen 📽️' },
+                { text: '10. Gå en kveldstur i frisk vinterluft 🌙' },
+                { text: '11. Bygg en snømann (eller en minisnømann) ⛄' },
+                { text: '12. Les et juleeventyr høyt 📖' },
+                { text: '13. Lag risengrynsgrøt – husk mandel! 🥣' },
+                { text: '14. Donér noe du ikke trenger ❤️' },
+                { text: '15. Spill brettspill med familien 🎲' },
+                { text: '16. Lag gløgg (barnevennlig eller voksen) 🍷' },
+                { text: '17. Skriv en hyggelig lapp til noen 💬' },
+                { text: '18. Lag en julefilm-liste for romjulen 📝' },
+                { text: '19. Pynt treet (eller lag en mini-variant) 🎄' },
+                { text: '20. Bak lussekatter eller kanelsnurrer 🧁' },
+                { text: '21. Pakk en hemmelig overraskelse til noen 🤫' },
+                { text: '22. Hør på «Deilig er jorden» og slapp av 🎼' },
+                { text: '23. Se Tre Nøtter til Askepott eller en favoritt 👑' },
+                { text: '24. Sett ut grøt til nissen og kos dere 🎅' }
+            ];
+
+            async function loadAdventItems() {
+                try {
+                    const res = await fetch('/julekalender_ny.json', { cache: 'no-store' });
+                    if (!res.ok) throw new Error('Failed to load julekalender_ny.json');
+                    const data = await res.json();
+                    if (!Array.isArray(data)) throw new Error('Invalid julekalender_ny.json format');
+                    return data.map(text => ({ text }));
+                } catch (e) {
+                    return defaultAdventItems;
+                }
+            }
+
+            const showAdventPopup = (item) => {
+                const overlay = document.getElementById('movie-popup-overlay');
+                const titleEl = document.getElementById('movie-popup-title');
+                const streamingContainer = document.getElementById('movie-popup-streaming');
+                const streamingLabel = document.querySelector('.movie-popup-streaming-label');
+                const streamingLinks = document.getElementById('streaming-links');
+                const headerEl = document.getElementById('movie-popup-header');
+                const closeBtn = document.getElementById('movie-popup-close');
+
+                // Remove header for advent popup
+                if (headerEl) headerEl.textContent = '';
+                if (closeBtn) closeBtn.textContent = '🎄';
+                titleEl.textContent = item.text || '';
+
+                // Hide the reroll button for advent calendar
+                const rerollBtn = document.getElementById('reroll-movie');
+                if (rerollBtn) {
+                    rerollBtn.style.display = 'none';
+                }
+
+                // Render optional links (e.g., Spotify)
+                if (item.links && item.links.length && streamingContainer && streamingLinks) {
+                    streamingLinks.innerHTML = '';
+                    if (streamingLabel) streamingLabel.textContent = 'Lenker:';
+                    item.links.forEach(({ label, url, icon }) => {
+                        const a = document.createElement('a');
+                        a.className = 'streaming-link';
+                        a.href = url;
+                        a.target = '_blank';
+                        a.rel = 'noopener noreferrer';
+                        a.innerHTML = `<span class="streaming-icon">${icon || '🔗'}</span><span>${label || 'Lenke'}</span>`;
+                        streamingLinks.appendChild(a);
+                    });
+                    streamingContainer.style.display = 'block';
+                } else if (streamingContainer) {
+                    streamingContainer.style.display = 'none';
+                }
+                overlay.classList.add('active');
+            };
+
+            const adventItems = await loadAdventItems();
+
+            const now = new Date();
+            const year = now.getFullYear();
+            const decStart = new Date(year, 11, 1); // Dec 1
+            // Monday-first index (Mon=0..Sun=6)
+            const offset = (decStart.getDay() + 6) % 7;
+            const totalCells = Math.ceil((offset + 24) / 7) * 7; // rows up to day 24's week end
+
+            grid.innerHTML = '';
+            for (let i = 0; i < totalCells; i++) {
+                const dayNum = i - offset + 1; // 1..24 when valid
+                if (dayNum < 1 || dayNum > 24) {
+                    const empty = document.createElement('div');
+                    empty.className = 'day-card empty';
+                    empty.setAttribute('aria-hidden', 'true');
+                    grid.appendChild(empty);
+                    continue;
+                }
+
+                const card = document.createElement('div');
+                card.className = 'day-card';
+
+                const thisDate = new Date(year, 11, dayNum);
+                const dow = thisDate.getDay(); // 0 Sun .. 6 Sat
+                if (dow === 0 || dow === 6) card.classList.add('weekend');
+                if (dayNum === 24) card.classList.add('is-24');
+
+                const num = document.createElement('div');
+                num.className = 'day-num';
+                num.textContent = String(dayNum);
+
+                card.appendChild(num);
+                card.addEventListener('click', () => {
+                    const content = adventItems[dayNum - 1] || { text: `Luke ${dayNum}` };
+                    showAdventPopup(content);
+                });
+                grid.appendChild(card);
+            }
+        })();
+
+        // --- Julemusikk ---
+        (async function initJulemusikk(){
+            const grid = document.getElementById('music-grid');
+            if (!grid) return;
+
+            const playlists = [
+                {
+                    title: 'Cozy Christmas Jazz',
+                    url: 'https://open.spotify.com/playlist/37i9dQZF1DWU0r6G8OGirN?si=96a6655ac02b4043',
+                    description: 'Varme instrumentale versjoner av dine favoritt-julesanger.'
+                },
+                {
+                    title: 'Instrumental julemusikk 🎄',
+                    url: 'https://open.spotify.com/playlist/5jXMIhLOGbaSaRAP6Rmi1K?si=b96af4567eee4e13',
+                    description: 'Instrumental julemusikk som gir en varm og hyggelig julestemning. Perfekt som bakgrunn.'
+                },
+                {
+                    title: 'Christmas Hits',
+                    url: 'https://open.spotify.com/playlist/37i9dQZF1DX0Yxoavh5qJV?si=dda1f5f00afd4b1c',
+                    description: 'De største julesangene gjennom tidene.'
+                }
+            ];
+
+            grid.innerHTML = '';
+            playlists.forEach(({ title, url, description }) => {
+                const card = document.createElement('div');
+                card.className = 'music-card';
+                const h = document.createElement('div');
+                h.className = 'music-title';
+                h.textContent = title || 'Spilleliste';
+                const p = document.createElement('div');
+                p.className = 'music-desc';
+                p.textContent = description || '';
+                const actions = document.createElement('div');
+                actions.className = 'music-actions';
+                const a = document.createElement('a');
+                a.className = 'streaming-link';
+                a.href = url;
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
+                a.innerHTML = '<span class="streaming-icon">🎵</span><span>Åpne i Spotify</span>';
+                actions.appendChild(a);
+                card.appendChild(h);
+                if (description) card.appendChild(p);
+                card.appendChild(actions);
+                grid.appendChild(card);
+            });
+
+            // Add Christmas radio section
+            const radioSection = document.createElement('div');
+            radioSection.className = 'music-card';
+            const radioText = document.createElement('div');
+            radioText.className = 'music-title';
+            radioText.textContent = 'Julemusikk på radio';
+            const radioDesc = document.createElement('div');
+            radioDesc.className = 'music-desc';
+            radioDesc.textContent = 'Her kan du høre på julemusikk via juleradio.';
+            const radioLink = document.createElement('a');
+            radioLink.className = 'streaming-link';
+            radioLink.href = 'https://www.lydenavnorge.no/p7/';
+            radioLink.target = '_blank';
+            radioLink.rel = 'noopener noreferrer';
+            radioLink.innerHTML = '<span class="streaming-icon">📻</span><span>Gå til juleradio</span>';
+            radioSection.appendChild(radioText);
+            radioSection.appendChild(radioDesc);
+            radioSection.appendChild(radioLink);
+            grid.appendChild(radioSection);
+        })();
+
+        document.getElementById('show-filmrulett').addEventListener('click', function() {
+            document.getElementById('julefilmkalender').classList.remove('active');
+            document.getElementById('julefilmkalender').style.display = 'none';
+            document.getElementById('filmrulett').classList.add('active');
+            document.getElementById('filmrulett').style.display = '';
+        });
+
+        document.querySelector('a[href="#julefilmkalender"]')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('filmrulett').classList.remove('active');
+            document.getElementById('filmrulett').style.display = 'none';
+            document.getElementById('julefilmkalender').classList.add('active');
+            document.getElementById('julefilmkalender').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

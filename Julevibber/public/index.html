@@ -673,31 +673,23 @@
         handleHash();
 
         // --- Movie Popup ---
-        const movieStreamingData = {
-            'Hjemme Alene': [{ service: 'Disney+', url: 'https://www.disneyplus.com', icon: '🎬' }],
-            'Hjemme Alene 2': [{ service: 'Disney+', url: 'https://www.disneyplus.com', icon: '🎬' }],
-            'Elf': [{ service: 'HBO Max', url: 'https://www.max.com', icon: '🎬' }],
-            'The Polar Express': [{ service: 'HBO Max', url: 'https://www.max.com', icon: '🎬' }],
-            'Love Actually': [{ service: 'Netflix', url: 'https://www.netflix.com', icon: '🎬' }, { service: 'Prime Video', url: 'https://www.primevideo.com', icon: '🎬' }],
-            'How the Grinch Stole Christmas': [{ service: 'Netflix', url: 'https://www.netflix.com', icon: '🎬' }],
-            'The Holiday': [{ service: 'Netflix', url: 'https://www.netflix.com', icon: '🎬' }],
-            'Klaus': [{ service: 'Netflix', url: 'https://www.netflix.com', icon: '🎬' }],
-            'A Christmas Carol': [{ service: 'Disney+', url: 'https://www.disneyplus.com', icon: '🎬' }],
-            'The Nightmare Before Christmas': [{ service: 'Disney+', url: 'https://www.disneyplus.com', icon: '🎬' }],
-            'Jingle All the Way': [{ service: 'Disney+', url: 'https://www.disneyplus.com', icon: '🎬' }],
-            'Miracle on 34th Street': [{ service: 'Disney+', url: 'https://www.disneyplus.com', icon: '🎬' }],
-            'A Charlie Brown Christmas': [{ service: 'Apple TV+', url: 'https://tv.apple.com', icon: '🎬' }],
-            'Arthur Christmas': [{ service: 'Netflix', url: 'https://www.netflix.com', icon: '🎬' }],
-            'Scrooged': [{ service: 'Prime Video', url: 'https://www.primevideo.com', icon: '🎬' }],
-            'Gremlins': [{ service: 'HBO Max', url: 'https://www.max.com', icon: '🎬' }],
-            "National Lampoon's Christmas Vacation": [{ service: 'HBO Max', url: 'https://www.max.com', icon: '🎬' }],
-            'The Santa Clause': [{ service: 'Disney+', url: 'https://www.disneyplus.com', icon: '🎬' }],
-            'The Muppet Christmas Carol': [{ service: 'Disney+', url: 'https://www.disneyplus.com', icon: '🎬' }],
-            'Last Christmas': [{ service: 'Netflix', url: 'https://www.netflix.com', icon: '🎬' }],
-            'The Christmas Chronicles': [{ service: 'Netflix', url: 'https://www.netflix.com', icon: '🎬' }],
-            'Noelle': [{ service: 'Disney+', url: 'https://www.disneyplus.com', icon: '🎬' }],
-            'Christmas with the Kranks': [{ service: 'Prime Video', url: 'https://www.primevideo.com', icon: '🎬' }]
-        };
+        let movieStreamingData = {};
+        
+        // Load streaming links from external JSON file
+        async function loadStreamingLinks() {
+            try {
+                const res = await fetch('streaming_links.json', { cache: 'no-store' });
+                if (!res.ok) throw new Error('Failed to load streaming links');
+                const data = await res.json();
+                movieStreamingData = data;
+            } catch (e) {
+                console.warn('Could not load streaming links:', e);
+                movieStreamingData = {};
+            }
+        }
+        
+        // Load streaming data on page load
+        loadStreamingLinks();
 
         const showMoviePopup = (movieTitle, showRerollButton = true, isCalendar = false) => {
             const overlay = document.getElementById('movie-popup-overlay');

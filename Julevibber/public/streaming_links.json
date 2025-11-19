@@ -1,0 +1,74 @@
+{
+  "A boy called christmas": [
+    { "service": "Netflix", "url": "https://www.netflix.com/search?q=A%20boy%20called%20christmas", "icon": "🎬" }
+  ],
+  "The christmas chronicles": [
+    { "service": "Netflix", "url": "https://www.netflix.com/search?q=The%20christmas%20chronicles", "icon": "🎬" }
+  ],
+  "Alene hjemme": [
+    { "service": "Disney+", "url": "https://www.disneyplus.com/search?q=home%20alone", "icon": "🎬" }
+  ],
+  "The santa clause": [
+    { "service": "Disney+", "url": "https://www.disneyplus.com/search?q=santa%20clause", "icon": "🎬" }
+  ],
+  "Elf": [
+    { "service": "HBO Max", "url": "https://www.hbomax.com/search?q=elf", "icon": "🎬" }
+  ],
+  "Jul i flåklypa": [
+    { "service": "Viaplay", "url": "https://www.viaplay.no/", "icon": "📺" }
+  ],
+  "Klaus": [
+    { "service": "Netflix", "url": "https://www.netflix.com/search?q=Klaus", "icon": "🎬" }
+  ],
+  "Holidate": [
+    { "service": "Netflix", "url": "https://www.netflix.com/search?q=Holidate", "icon": "🎬" }
+  ],
+  "Jingle Jangle": [
+    { "service": "Netflix", "url": "https://www.netflix.com/search?q=Jingle%20Jangle", "icon": "🎬" }
+  ],
+  "Last Christmas": [
+    { "service": "Netflix", "url": "https://www.netflix.com/search?q=Last%20Christmas", "icon": "🎬" }
+  ],
+  "A christmas carol": [
+    { "service": "Disney+", "url": "https://www.disneyplus.com/search?q=christmas%20carol", "icon": "🎬" }
+  ],
+  "The santa clause 2": [
+    { "service": "Disney+", "url": "https://www.disneyplus.com/search?q=santa%20clause%202", "icon": "🎬" }
+  ],
+  "The santa clause 3": [
+    { "service": "Disney+", "url": "https://www.disneyplus.com/search?q=santa%20clause%203", "icon": "🎬" }
+  ],
+  "Love Actually": [
+    { "service": "TV2 Play", "url": "https://www.tv2play.no/search?q=Love%20Actually", "icon": "🎬" }
+  ],
+  "Arthur Christmas": [
+    { "service": "Viaplay", "url": "https://www.viaplay.no/search?q=Arthur%20Christmas", "icon": "🎬" }
+  ],
+  "The holiday": [
+    { "service": "Disney+", "url": "https://www.disneyplus.com/search?q=The%20holiday", "icon": "🎬" }
+  ],
+  "Fred Claus": [
+    { "service": "Viaplay", "url": "https://www.viaplay.no/search?q=Fred%20Claus", "icon": "🎬" }
+  ],
+  "Polarekspressen": [
+    { "service": "HBO Max", "url": "https://www.hbomax.com/search?q=Polar%20Express", "icon": "🎬" }
+  ],
+  "Christmas with the kranks": [
+    { "service": "Viaplay", "url": "https://www.viaplay.no/search?q=Christmas%20with%20the%20kranks", "icon": "🎬" }
+  ],
+  "Hjeme alene 2": [
+    { "service": "Disney+", "url": "https://www.disneyplus.com/search?q=home%20alone%202", "icon": "🎬" }
+  ],
+  "Hjemme alene 3": [
+    { "service": "Disney+", "url": "https://www.disneyplus.com/search?q=home%20alone%203", "icon": "🎬" }
+  ],
+  "The Grinch": [
+    { "service": "Disney+", "url": "https://www.disneyplus.com/search?q=Grinch", "icon": "🎬" }
+  ],
+  "Hjelp det er juleferie": [
+    { "service": "Viaplay", "url": "https://www.viaplay.no/search?q=Christmas%20Vacation", "icon": "🎬" }
+  ],
+  "The Christmas Chronicles 2": [
+    { "service": "Netflix", "url": "https://www.netflix.com/search?q=Christmas%20Chronicles%202", "icon": "🎬" }
+  ]
+}

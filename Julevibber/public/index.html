@@ -633,7 +633,18 @@
             if (sectionIds.has(raw)) {
                 activateSection(raw);
                 // default subsection when going to Filmer via hash
-                if (raw === 'filmer') activateSubsection('julefilmkalender');
+                if (raw === 'filmer') {
+                    activateSubsection('julefilmkalender');
+                    // Check if we should auto-reveal a day from URL parameter
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const dayParam = urlParams.get('day');
+                    if (dayParam && window.revealCalendarDay) {
+                        const day = parseInt(dayParam, 10);
+                        if (day >= 1 && day <= 24) {
+                            setTimeout(() => window.revealCalendarDay(day), 100);
+                        }
+                    }
+                }
                 return;
             }
             // No/unknown hash: keep defaults already in markup
@@ -1089,12 +1100,37 @@
             loadMovies().then(assignments => {
                 calendarAssignments = assignments;
                 render(assignments);
+                
+                // Check if we should auto-reveal a day from URL parameter
+                const urlParams = new URLSearchParams(window.location.search);
+                const dayParam = urlParams.get('day');
+                if (dayParam) {
+                    const day = parseInt(dayParam, 10);
+                    if (day >= 1 && day <= 24) {
+                        revealed.clear();
+                        revealed.add(day);
+                        render(assignments);
+                        const movieTitle = assignments[day - 1] || 'Film';
+                        showMoviePopup(movieTitle, false, true);
+                    }
+                }
             });
 
             // Handler to hide revealed state when popup closes
             window.calendarCloseHandler = () => {
                 revealed.clear();
                 render(calendarAssignments);
+            };
+            
+            // Expose function to reveal a specific day (called from navigation)
+            window.revealCalendarDay = (day) => {
+                if (day >= 1 && day <= 24 && calendarAssignments.length > 0) {
+                    revealed.clear();
+                    revealed.add(day);
+                    render(calendarAssignments);
+                    const movieTitle = calendarAssignments[day - 1] || 'Film';
+                    showMoviePopup(movieTitle, false, true);
+                }
             };
         })();
 

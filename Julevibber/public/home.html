@@ -429,10 +429,10 @@
             const dailyFilmLink = document.getElementById('daily-film-link');
 
             if (month === 11 && today >= 1 && today <= 24) {
-                dailyFilmLink.href = `/index.html#julefilmkalender-day-${today}`;
+                dailyFilmLink.href = `/index.html?day=${today}#filmer`;
                 dailyFilmLink.textContent = `Dagens filmluke: ${today}. desember`;
             } else {
-                dailyFilmLink.href = `/index.html#julefilmkalender-day-1`;
+                dailyFilmLink.href = `/index.html?day=1#filmer`;
                 dailyFilmLink.textContent = `Dagens filmluke: 1. desember`;
             }
         }
@@ -497,22 +497,12 @@
             const month = now.getMonth();
             const day = now.getDate();
             if (month === 11 && day >= 1 && day <= 24) {
-                return defaultMovies[day - 1] || 'Film';
+                return movieList[day - 1] || 'Film';
             }
-            return defaultMovies[0];
+            return movieList[0] || 'Film';
         }
 
-        function showMoviePopup(title) {
-            document.getElementById('movie-popup-title').textContent = title;
-            document.getElementById('movie-popup-overlay').style.display = 'flex';
-        }
-        document.getElementById('movie-popup-close').onclick = function() {
-            document.getElementById('movie-popup-overlay').style.display = 'none';
-        };
-        document.getElementById('daily-film-link').onclick = function(e) {
-            e.preventDefault();
-            showMoviePopup(getTodaysMovieTitle());
-        };
+        // Button now links directly to index.html, no popup needed on home page
     </script>
 </body>
 </html>
